@@ -4,7 +4,7 @@ import styles from "./Collapse.module.scss";
 interface Props {}
 
 export default function Collapse({}: Props): ReactElement {
-  // todo: contentHeight no need for useState
+  // todo: contentHeight no need for useState; btn styling
   const [expand, setexpand] = useState(true);
   const [contentHeight, setcontentHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
