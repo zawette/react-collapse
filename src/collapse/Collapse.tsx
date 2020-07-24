@@ -4,18 +4,18 @@ import styles from "./Collapse.module.scss";
 interface Props {}
 
 export default function Collapse({}: Props): ReactElement {
-    // todo: contentHeight no need for useState
+  // todo: contentHeight no need for useState
   const [expand, setexpand] = useState(true);
   const [contentHeight, setcontentHeight] = useState(0);
-  const setContentDivHeight = (height: number) => {
-    if (contentRef.current) contentRef.current.style.height = "" + height;
-  };
   const contentRef = useRef<HTMLDivElement>(null);
-  const tempFunc = (ex:boolean) => {
+  const setContentDivHeight = (height: number) => {
+    if (contentRef.current)
+      contentRef.current.style.height = "" + height + "px";
+  };
+  const tempFunc = (ex: boolean) => {
     ex ? setContentDivHeight(contentHeight) : setContentDivHeight(0);
-    debugger
-
     setexpand(ex);
+    console.log(contentRef);
   };
 
   useLayoutEffect(() => {
