@@ -9,16 +9,18 @@ interface Props {
 export default function Collapse({}: Props): ReactElement {
     const [expand, setexpand] = useState(true);
     const [contentHeight, setcontentHeight] = useState(0)
+    const setContentDivHeight= (height:number)=>{
+        if(contentRef.current) contentRef.current.style.height = ""+ height
+    }
     const contentRef = useRef<HTMLDivElement>(null);
     const tempFunc= ()=>{
-        console.log(contentHeight)
-        if(contentRef.current) contentRef.current.style.height = expand ?  "" + contentHeight: "0"
+         expand ?  setContentDivHeight(contentHeight): setContentDivHeight(0)
         setexpand(!expand)
     }
 
     useLayoutEffect(()=>{
     setcontentHeight(contentRef.current?.clientHeight || 0);
-return setexpand(false)
+return ()=>{setexpand(false);setContentDivHeight(0)}
 },[])
 
     return (
