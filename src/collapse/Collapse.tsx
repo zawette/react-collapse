@@ -7,17 +7,16 @@ interface Props {
 }
 
 export default function Collapse(props: Props): ReactElement {
-  // todo: handle when the window size changes; clicking on the header should expand
+  // todo: handle when the window size changes
   const [isExpanded, setisExpanded] = useState(true);
   const [contentHeight, setcontentHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
   const setContentDivHeight = (height: number) => {
     if (contentRef.current) contentRef.current.style.height = height + "px";
   };
-  const tempFunc = (ex: boolean) => {
+  const toggle = (ex: boolean) => {
     ex ? setContentDivHeight(contentHeight) : setContentDivHeight(0);
     setisExpanded(ex);
-    console.log(contentRef);
   };
 
   useLayoutEffect(() => {
@@ -28,9 +27,9 @@ export default function Collapse(props: Props): ReactElement {
 
   return (
     <div className={styles.zawCollapse}>
-      <div className="header">
+      <div className="header" onClick={() => toggle(!isExpanded)}>
         {props.header}
-        <button className="expandBtn" onClick={() => tempFunc(!isExpanded)}>
+        <button className="expandBtn">
           {isExpanded ? "▲" : "▼"}
         </button>
       </div>
