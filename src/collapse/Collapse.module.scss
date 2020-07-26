@@ -4,6 +4,8 @@
     :global{
         .expandBtn{
             float: right;
+            border: none;
+            background-color: inherit;
         }
         .content{
             transition: height .3s ease-in-out;
