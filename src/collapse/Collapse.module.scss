@@ -2,11 +2,14 @@
     background-color: white;
     padding: 1rem;
     :global{
+        .header{
+            cursor: pointer;
         .expandBtn{
             float: right;
             border: none;
             background-color: inherit;
         }
+    }
         .content{
             transition: height .3s ease-in-out;
             overflow: hidden;

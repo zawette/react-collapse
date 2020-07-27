@@ -5,7 +5,7 @@ import "./App.css";
 function App() {
   return (
     <div className="App">
-      <Collapse header="test" className="myAccordion">
+      <Collapse header="test" className="myAccordion" onToggle={(prevState)=>console.log(prevState)}>
         Proident aute elit eiusmod eu consequat. Nulla mollit fugiat qui
         incididunt aliquip aliqua eu occaecat ea et incididunt. Non ex est
         consequat do aliqua aliqua ipsum aute commodo eu consequat. Commodo
