@@ -4,10 +4,11 @@ import styles from "./Collapse.module.scss";
 interface Props {
   children: React.ReactNode;
   header: React.ReactNode;
+  className:string;
 }
 
-export default function Collapse(props: Props): ReactElement {
-  // todo: handle when the window size changes
+function Collapse(props: Props): ReactElement {
+  // todo: handle when the window size changes; expand from parent; 
   const [isExpanded, setisExpanded] = useState(true);
   const [contentHeight, setcontentHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -26,7 +27,7 @@ export default function Collapse(props: Props): ReactElement {
   }, []);
 
   return (
-    <div className={styles.zawCollapse}>
+    <div className={`${props.className} ${styles.zawCollapse}`}>
       <div className="header" onClick={() => toggle(!isExpanded)}>
         {props.header}
         <button className="expandBtn">
@@ -40,3 +41,9 @@ export default function Collapse(props: Props): ReactElement {
     </div>
   );
 }
+
+Collapse.defaultProps = {
+    className:""
+  } as Partial<Props>;
+
+  export default Collapse;
