@@ -5,42 +5,49 @@ import useWindowHeight from "./useWindowHeight";
 interface Props {
   children: React.ReactNode;
   header: React.ReactNode;
-  className:string;
-  onToggle?:(prevState: boolean) => any;
+  className: string;
+  onToggle?: (prevState: boolean) => any;
 }
 
 function Collapse(props: Props): ReactElement {
-  // todo: handle when the window width changes; expand from parent; 
+  // todo: method to expand from parent;
   const [isExpanded, setisExpanded] = useState(false);
-  const [contentHeight, setcontentHeight] = useState(0);
+  const [contentSize, setcontentSize] = useState({height:0,width:0});
   const contentRef = useRef<HTMLDivElement>(null);
-  let windowHeight=useWindowHeight();
-  const setContentDivHeight = (height: number) => {
-    if (contentRef.current) contentRef.current.style.height = height + "px";
+  let [windowHeight, windowWidth] = useWindowHeight();
+  const setContentDivSize = (height: number,width:number) => {
+    if (contentRef.current) {
+      contentRef.current.style.height = height + "px";
+      contentRef.current.style.width = width + "px";
+    }
   };
+  const resetContentDivSize = () => {
+    if (contentRef.current) {
+      contentRef.current.style.height ="";
+      contentRef.current.style.width ="";
+    }
+  };
+
   const toggle = () => {
-    !isExpanded ? setContentDivHeight(contentHeight) : setContentDivHeight(0);
+    !isExpanded ? setContentDivSize(contentSize.height,contentSize.width) : setContentDivSize(0,0);
     setisExpanded(!isExpanded);
     props.onToggle && props.onToggle(isExpanded);
   };
 
-  // init
   useLayoutEffect(() => {
-    console.log('contentRef.current?.clientHeight ', contentRef.current?.clientHeight )
-    console.log('contentRef.current?.offsetHeight ', contentRef.current?.offsetHeight )
-    console.log('contentRef.current?.scrollHeight ', contentRef.current?.scrollHeight )
-    setcontentHeight(contentRef.current?.scrollHeight || 0);
-    setContentDivHeight(0);
-  }, [windowHeight]);
+    resetContentDivSize()
+    let height=contentRef.current?.scrollHeight || 0
+    let width=contentRef.current?.scrollWidth || 0
+    setcontentSize({height,width});
+    setContentDivSize(0,width);
+    setisExpanded(false);
+  }, [windowHeight, windowWidth]);
 
-  
   return (
     <div className={`${props.className} ${styles.zawCollapse}`}>
       <div className="header" onClick={() => toggle()}>
         {props.header}
-        <button className="expandBtn">
-          {isExpanded ? "▲" : "▼"}
-        </button>
+        <button className="expandBtn">{isExpanded ? "▲" : "▼"}</button>
       </div>
 
       <div className="content" ref={contentRef}>
@@ -51,7 +58,7 @@ function Collapse(props: Props): ReactElement {
 }
 
 Collapse.defaultProps = {
-    className:""
-  } as Partial<Props>;
+  className: "",
+} as Partial<Props>;
 
-  export default Collapse;
+export default Collapse;
