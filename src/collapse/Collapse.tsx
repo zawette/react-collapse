@@ -1,5 +1,6 @@
 import React, { ReactElement, useState, useRef, useLayoutEffect } from "react";
 import styles from "./Collapse.module.scss";
+import useWindowHeight from "./useWindowHeight";
 
 interface Props {
   children: React.ReactNode;
@@ -9,10 +10,11 @@ interface Props {
 }
 
 function Collapse(props: Props): ReactElement {
-  // todo: handle when the window size changes; expand from parent; 
+  // todo: handle when the window width changes; expand from parent; 
   const [isExpanded, setisExpanded] = useState(false);
   const [contentHeight, setcontentHeight] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
+  let windowHeight=useWindowHeight();
   const setContentDivHeight = (height: number) => {
     if (contentRef.current) contentRef.current.style.height = height + "px";
   };
@@ -22,11 +24,16 @@ function Collapse(props: Props): ReactElement {
     props.onToggle && props.onToggle(isExpanded);
   };
 
+  // init
   useLayoutEffect(() => {
-    setcontentHeight(contentRef.current?.clientHeight || 0);
+    console.log('contentRef.current?.clientHeight ', contentRef.current?.clientHeight )
+    console.log('contentRef.current?.offsetHeight ', contentRef.current?.offsetHeight )
+    console.log('contentRef.current?.scrollHeight ', contentRef.current?.scrollHeight )
+    setcontentHeight(contentRef.current?.scrollHeight || 0);
     setContentDivHeight(0);
-  }, []);
+  }, [windowHeight]);
 
+  
   return (
     <div className={`${props.className} ${styles.zawCollapse}`}>
       <div className="header" onClick={() => toggle()}>

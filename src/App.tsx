@@ -14,8 +14,8 @@ function App() {
         cillum eiusmod mollit et laboris sint.
       </Collapse>
 
-      <Collapse header={<span>nested test ❗</span>}>
-      <Collapse header={<span>child ❗</span>}>
+      {/* <Collapse header={<span>nested test </span>}>
+      <Collapse header={<span>child </span>}>
         Cupidatat mollit elit reprehenderit tempor incididunt in sunt. Labore
         deserunt mollit laboris minim qui est quis aliquip voluptate nulla
         occaecat amet duis. Elit in aliqua exercitation dolore minim ad irure
@@ -25,7 +25,7 @@ function App() {
         excepteur tempor laboris nisi aute excepteur culpa. Pariatur laborum
         ipsum Lorem magna mollit nulla do.
       </Collapse>
-      </Collapse>
+      </Collapse> */}
     </div>
   );
 }
