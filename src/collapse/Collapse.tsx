@@ -6,16 +6,17 @@ interface Props {
   children: React.ReactNode;
   header: React.ReactNode;
   className: string;
+  initExpanded: boolean;
   onToggle?: (prevState: boolean) => any;
 }
 
 function Collapse(props: Props): ReactElement {
   // todo: nested accordion; method to expand from parent;
-  const [isExpanded, setisExpanded] = useState(false);
-  const [contentSize, setcontentSize] = useState({height:0,width:0});
+  const [isExpanded, setisExpanded] = useState(true);
+  const [contentSize, setcontentSize] = useState({ height: 0, width: 0 });
   const contentRef = useRef<HTMLDivElement>(null);
   let [windowHeight, windowWidth] = useWindowHeight();
-  const setContentDivSize = (height: number,width:number) => {
+  const setContentDivSize = (height: number, width: number) => {
     if (contentRef.current) {
       contentRef.current.style.height = height + "px";
       contentRef.current.style.width = width + "px";
@@ -23,24 +24,28 @@ function Collapse(props: Props): ReactElement {
   };
   const resetContentDivSize = () => {
     if (contentRef.current) {
-      contentRef.current.style.height ="";
-      contentRef.current.style.width ="";
+      contentRef.current.style.height = "";
+      contentRef.current.style.width = "";
     }
   };
 
   const toggle = () => {
-    !isExpanded ? setContentDivSize(contentSize.height,contentSize.width) : setContentDivSize(0,0);
+    !isExpanded
+      ? setContentDivSize(contentSize.height, contentSize.width)
+      : setContentDivSize(0, 0);
     setisExpanded(!isExpanded);
     props.onToggle && props.onToggle(isExpanded);
   };
 
   useLayoutEffect(() => {
-    resetContentDivSize()
-    let height=contentRef.current?.scrollHeight || 0
-    let width=contentRef.current?.scrollWidth || 0
-    setcontentSize({height,width});
-    setContentDivSize(0,width);
-    setisExpanded(false);
+    resetContentDivSize();
+    let height = contentRef.current?.scrollHeight || 0;
+    let width = contentRef.current?.scrollWidth || 0;
+    setcontentSize({ height, width });
+    if (!props.initExpanded) {
+      setContentDivSize(0, width);
+      setisExpanded(false);
+    }
   }, [windowHeight, windowWidth]);
 
   return (
@@ -59,6 +64,7 @@ function Collapse(props: Props): ReactElement {
 
 Collapse.defaultProps = {
   className: "",
+  initExpanded: false,
 } as Partial<Props>;
 
 export default Collapse;

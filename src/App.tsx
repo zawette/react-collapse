@@ -15,7 +15,17 @@ function App() {
       </Collapse>
 
       <Collapse header={<span>nested test </span>}>
-      <Collapse header={<span>child </span>}>
+      <Collapse header={<span>child </span>} initExpanded={true}>
+        Cupidatat mollit elit reprehenderit tempor incididunt in sunt. Labore
+        deserunt mollit laboris minim qui est quis aliquip voluptate nulla
+        occaecat amet duis. Elit in aliqua exercitation dolore minim ad irure
+        excepteur. Esse enim deserunt quis et nostrud pariatur ut fugiat.
+        Adipisicing do minim nulla ullamco officia occaecat exercitation cillum
+        nostrud eiusmod labore ex do. Culpa quis nisi culpa quis fugiat ut
+        excepteur tempor laboris nisi aute excepteur culpa. Pariatur laborum
+        ipsum Lorem magna mollit nulla do.
+      </Collapse>
+      <Collapse header={<span>child </span>} initExpanded={true}>
         Cupidatat mollit elit reprehenderit tempor incididunt in sunt. Labore
         deserunt mollit laboris minim qui est quis aliquip voluptate nulla
         occaecat amet duis. Elit in aliqua exercitation dolore minim ad irure
