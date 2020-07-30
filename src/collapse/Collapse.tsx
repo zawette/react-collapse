@@ -16,23 +16,21 @@ function Collapse(props: Props): ReactElement {
   const [contentSize, setcontentSize] = useState({ height: 0, width: 0 });
   const contentRef = useRef<HTMLDivElement>(null);
   let [windowHeight, windowWidth] = useWindowHeight();
-  const setContentDivSize = (height: number, width: number) => {
+  const setContentDivSize = (height: number) => {
     if (contentRef.current) {
       contentRef.current.style.height = height + "px";
-      contentRef.current.style.width = width + "px";
     }
   };
   const resetContentDivSize = () => {
     if (contentRef.current) {
       contentRef.current.style.height = "";
-      contentRef.current.style.width = "";
     }
   };
 
   const toggle = () => {
     !isExpanded
-      ? setContentDivSize(contentSize.height, contentSize.width)
-      : setContentDivSize(0, 0);
+      ? setContentDivSize(contentSize.height)
+      : setContentDivSize(0);
     setisExpanded(!isExpanded);
     props.onToggle && props.onToggle(isExpanded);
   };
@@ -43,7 +41,7 @@ function Collapse(props: Props): ReactElement {
     let width = contentRef.current?.scrollWidth || 0;
     setcontentSize({ height, width });
     if (!props.initExpanded) {
-      setContentDivSize(0, width);
+      setContentDivSize(0);
       setisExpanded(false);
     }
   }, [windowHeight, windowWidth]);
