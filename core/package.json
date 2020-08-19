@@ -10,6 +10,12 @@
     "type": "git",
     "url": "https://github.com/zawette/react-collapse.git"
   },
+  "keywords": [
+    "react",
+    "collapse",
+    "accordion",
+    "react-zaw-collapse"
+  ],
   "eslintConfig": {
     "extends": "react-app"
   },

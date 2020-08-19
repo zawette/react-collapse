@@ -11,7 +11,7 @@ interface Props {
 }
 
 function Collapse(props: Props): ReactElement {
-  // todo: nested accordion; method to expand from parent;style att
+  // todo: nested accordion; method to expand from parent;style att, transition speed etc
   const [isExpanded, setisExpanded] = useState(true);
   const [contentSize, setcontentSize] = useState({ height: 0, width: 0 });
   const contentRef = useRef<HTMLDivElement>(null);
