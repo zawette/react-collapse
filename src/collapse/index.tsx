@@ -1,5 +1,5 @@
 import React, { ReactElement, useState, useRef, useLayoutEffect } from "react";
-import styles from "./Collapse.module.scss";
+import "./index.css";
 import useWindowHeight from "./useWindowHeight";
 
 interface Props {
@@ -11,7 +11,7 @@ interface Props {
 }
 
 function Collapse(props: Props): ReactElement {
-  // todo: nested accordion; method to expand from parent;
+  // todo: nested accordion; method to expand from parent;style att
   const [isExpanded, setisExpanded] = useState(true);
   const [contentSize, setcontentSize] = useState({ height: 0, width: 0 });
   const contentRef = useRef<HTMLDivElement>(null);
@@ -47,7 +47,7 @@ function Collapse(props: Props): ReactElement {
   }, [windowHeight, windowWidth]);
 
   return (
-    <div className={`${props.className} ${styles.zawCollapse}`}>
+    <div className={`${props.className} zawCollapse`}>
       <div className="header" onClick={() => toggle()}>
         {props.header}
         <button className="expandBtn">{isExpanded ? "▲" : "▼"}</button>

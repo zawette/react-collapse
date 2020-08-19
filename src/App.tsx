@@ -1,6 +1,5 @@
 import React from "react";
-import Collapse from "./collapse/Collapse";
-import "./App.css";
+import Collapse from "./collapse/";
 
 function App() {
   return (
