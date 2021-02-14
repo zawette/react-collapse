@@ -1,10 +1,11 @@
 .zawCollapse {
-  padding: 1rem;
 }
 .zawCollapse_header {
-  border: 1px solid #000;
-  padding: 1em;
+  padding: 1rem;
   cursor: pointer;
+  background-color: #4b5563;
+  color: white;
+  border-bottom: 1px solid black;
 }
 .zawCollapse_header_expandBtn {
   float: right;
@@ -12,9 +13,9 @@
   background-color: inherit;
 }
 .zawCollapse_content {
-  padding: 1rem;
   overflow: hidden;
   display: none;
-  background-color: #4b5563;
-  color: white;
+  background-color: white;
+  color: black;
+  margin-left: 1rem;
 }

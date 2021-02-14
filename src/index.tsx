@@ -23,26 +23,26 @@ const Collapse = (props: Props, ref: any) => {
 
   const toggle = () => {
     contentRef.current!.style.display = 'block';
-    contentRef.current!.style.transitionDuration = props.duration + 'ms';
     const contentHeight = contentRef.current?.offsetHeight;
-    const contentPadding = contentRef.current?.style.padding;
+    contentRef.current!.style.transitionDuration = props.duration + 'ms';
     if (!isExpanded) {
       setIsExpanded(true);
       contentRef.current!.style.height = 0 + 'px';
       setTimeout(() => {
-        contentRef.current!.style.height = contentHeight + 'px';
-      }, 30);
+        contentRef.current!.style.height = contentHeight! + 'px';
+      }, 10);
       setTimeout(() => {
         contentRef.current!.style.height = 'auto';
-      }, 30 + props.duration!);
+      }, props.duration!);
     } else {
       setIsExpanded(false);
-      contentRef.current!.style.height = 0 + 'px';
-      contentRef.current!.style.padding = 0 + 'px';
+      contentRef.current!.style.height = contentHeight! + 'px';
+      setTimeout(() => {
+        contentRef.current!.style.height = 0 + 'px';
+      }, 10);
       setTimeout(() => {
         contentRef.current!.style.display = 'none';
         contentRef.current!.style.height = 'auto';
-        contentRef.current!.style.padding = contentPadding!;
       }, props.duration!);
     }
   };
@@ -68,7 +68,7 @@ const Collapse = (props: Props, ref: any) => {
 const CollapseComponent = React.forwardRef<RefType, Props>(Collapse);
 CollapseComponent.defaultProps = {
   className: '',
-  duration: 800,
+  duration: 900,
   initExpanded: false,
 } as Partial<Props>;
 
