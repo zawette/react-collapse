@@ -19,9 +19,11 @@ interface RefType {
 const Collapse = (props: Props, ref: any) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
   let currentRef = props.Key && ref.current[props.Key];
 
   const toggle = () => {
+    headerRef.current!.style.pointerEvents = 'none';
     contentRef.current!.style.display = 'block';
     const contentHeight = contentRef.current?.offsetHeight;
     contentRef.current!.style.transitionDuration = props.duration + 'ms';
@@ -33,6 +35,7 @@ const Collapse = (props: Props, ref: any) => {
       }, 10);
       setTimeout(() => {
         contentRef.current!.style.height = 'auto';
+        headerRef.current!.style.pointerEvents = '';
       }, props.duration!);
     } else {
       setIsExpanded(false);
@@ -43,6 +46,7 @@ const Collapse = (props: Props, ref: any) => {
       setTimeout(() => {
         contentRef.current!.style.display = 'none';
         contentRef.current!.style.height = 'auto';
+        headerRef.current!.style.pointerEvents = '';
       }, props.duration!);
     }
   };
@@ -52,7 +56,11 @@ const Collapse = (props: Props, ref: any) => {
       className={`${props.className} ${styles.zawCollapse}`}
       ref={element => (currentRef = element)}
     >
-      <div className={styles.zawCollapse_header} onClick={() => toggle()}>
+      <div
+        className={styles.zawCollapse_header}
+        onClick={() => toggle()}
+        ref={headerRef}
+      >
         {props.header}
         <button className={styles.zawCollapse_header_expandBtn}>
           {isExpanded ? '▲' : '▼'}
