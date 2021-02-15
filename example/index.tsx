@@ -6,8 +6,8 @@ import Collapse from '../.';
 const App = () => {
   return (
     <div>
-      <Collapse header="test" className="myAccordion">
-        <Collapse header="test" className="myAccordion">
+      <Collapse header="nested collapse" className="myAccordion">
+        <Collapse header="test" className="myAccordion" duration={400}>
           Proident aute elit eiusmod eu consequat. Nulla mollit fugiat qui
           incididunt aliquip aliqua eu occaecat ea et incididunt. Non ex est
           consequat do aliqua aliqua ipsum aute commodo eu consequat. Commodo
@@ -24,7 +24,7 @@ const App = () => {
           rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
           ipsum dolor sit amet.
         </Collapse>
-        <Collapse header="test" className="myAccordion">
+        <Collapse header="test" className="myAccordion" duration={200}>
           Proident aute elit eiusmod eu consequat. Nulla mollit fugiat qui
           incididunt aliquip aliqua eu occaecat ea et incididunt. Non ex est
           consequat do aliqua aliqua ipsum aute commodo eu consequat. Commodo

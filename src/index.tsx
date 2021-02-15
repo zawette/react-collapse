@@ -76,7 +76,7 @@ const Collapse = (props: Props, ref: any) => {
 const CollapseComponent = React.forwardRef<RefType, Props>(Collapse);
 CollapseComponent.defaultProps = {
   className: '',
-  duration: 900,
+  duration: 700,
   initExpanded: false,
 } as Partial<Props>;
 
