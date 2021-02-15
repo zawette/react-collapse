@@ -57,17 +57,17 @@ const Collapse = (props: Props, ref: any) => {
       ref={element => (currentRef = element)}
     >
       <div
-        className={styles.zawCollapse_header}
+        className={`zawCollapse_header `}
         onClick={() => toggle()}
         ref={headerRef}
       >
         {props.header}
-        <button className={styles.zawCollapse_header_expandBtn}>
+        <button className={`zawCollapse_header_expandBtn`}>
           {isExpanded ? '▲' : '▼'}
         </button>
       </div>
 
-      <div className={styles.zawCollapse_content} ref={contentRef}>
+      <div className={`zawCollapse_content`} ref={contentRef}>
         {props.children}
       </div>
     </div>
