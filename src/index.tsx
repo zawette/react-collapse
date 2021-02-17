@@ -51,6 +51,10 @@ const Collapse = (props: Props, ref: any) => {
     }
   };
 
+  React.useEffect(() => {
+    if (props.initExpanded) toggle();
+  }, []);
+
   return (
     <div
       className={`${props.className} ${styles.zawCollapse}`}

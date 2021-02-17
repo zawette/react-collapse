@@ -6,7 +6,7 @@ import Collapse from '../.';
 const App = () => {
   return (
     <div>
-      <Collapse header="nested collapse" className="myAccordion">
+      <Collapse header="nested collapse" className="myAccordion" initExpanded>
         <Collapse header="test" className="myAccordion" duration={400}>
           Proident aute elit eiusmod eu consequat. Nulla mollit fugiat qui
           incididunt aliquip aliqua eu occaecat ea et incididunt. Non ex est
