@@ -9,7 +9,8 @@ interface Props {
   className?: string;
   Key?: string;
   initExpanded?: boolean;
-  onToggle?: (prevState: boolean) => any;
+  isExpanded?: boolean;
+  onClick?: (prevState: boolean) => any;
 }
 
 interface RefType {
@@ -17,7 +18,7 @@ interface RefType {
 }
 
 const Collapse = (props: Props, ref: any) => {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(props.initExpanded);
   const contentRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   let currentRef = props.Key && ref.current[props.Key];
@@ -27,8 +28,7 @@ const Collapse = (props: Props, ref: any) => {
     contentRef.current!.style.display = 'block';
     const contentHeight = contentRef.current?.offsetHeight;
     contentRef.current!.style.transitionDuration = props.duration + 'ms';
-    if (!isExpanded) {
-      setIsExpanded(true);
+    if (isExpanded) {
       contentRef.current!.style.height = 0 + 'px';
       setTimeout(() => {
         contentRef.current!.style.height = contentHeight! + 'px';
@@ -38,7 +38,6 @@ const Collapse = (props: Props, ref: any) => {
         headerRef.current!.style.pointerEvents = '';
       }, props.duration!);
     } else {
-      setIsExpanded(false);
       contentRef.current!.style.height = contentHeight! + 'px';
       setTimeout(() => {
         contentRef.current!.style.height = 0 + 'px';
@@ -51,9 +50,20 @@ const Collapse = (props: Props, ref: any) => {
     }
   };
 
+  const onClick = () => {
+    props.onClick?.(isExpanded!);
+    if (props.isExpanded === null || props.isExpanded === undefined)
+      setIsExpanded(!isExpanded);
+  };
+
   React.useEffect(() => {
-    if (props.initExpanded) toggle();
-  }, []);
+    toggle();
+  }, [isExpanded]);
+
+  React.useEffect(() => {
+    if (!(props.isExpanded === null || props.isExpanded === undefined))
+      setIsExpanded(props.isExpanded!);
+  }, [props.isExpanded]);
 
   return (
     <div
@@ -62,7 +72,7 @@ const Collapse = (props: Props, ref: any) => {
     >
       <div
         className={`zawCollapse_header `}
-        onClick={() => toggle()}
+        onClick={() => onClick()}
         ref={headerRef}
       >
         {props.header}

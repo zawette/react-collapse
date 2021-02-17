@@ -4,9 +4,19 @@ import * as ReactDOM from 'react-dom';
 import Collapse from '../.';
 
 const App = () => {
+  const [isExpanded, setIsExpanded] = React.useState(false);
+
   return (
     <div>
-      <Collapse header="nested collapse" className="myAccordion" initExpanded>
+      <Collapse
+        header="nested collapse"
+        className="myAccordion"
+        // initExpanded
+        isExpanded={isExpanded}
+        onClick={prevState => {
+          setIsExpanded(!isExpanded);
+        }}
+      >
         <Collapse header="test" className="myAccordion" duration={400}>
           Proident aute elit eiusmod eu consequat. Nulla mollit fugiat qui
           incididunt aliquip aliqua eu occaecat ea et incididunt. Non ex est
