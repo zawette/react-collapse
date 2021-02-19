@@ -20,12 +20,13 @@ interface RefType {
 
 const Collapse = (props: Props, ref: any) => {
   const [isExpanded, setIsExpanded] = useState(props.initExpanded);
+  const [isExpanding, setIsExpanding] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   let currentRef = props.Key && ref.current[props.Key];
 
   const toggle = () => {
-    headerRef.current!.style.pointerEvents = 'none';
+    setIsExpanding(true);
     contentRef.current!.style.display = 'block';
     const contentHeight = contentRef.current?.offsetHeight;
     contentRef.current!.style.transitionDuration = props.duration + 'ms';
@@ -36,7 +37,7 @@ const Collapse = (props: Props, ref: any) => {
       }, 10);
       setTimeout(() => {
         contentRef.current!.style.height = 'auto';
-        headerRef.current!.style.pointerEvents = '';
+        setIsExpanding(false);
       }, props.duration!);
     } else {
       contentRef.current!.style.height = contentHeight! + 'px';
@@ -46,15 +47,21 @@ const Collapse = (props: Props, ref: any) => {
       setTimeout(() => {
         contentRef.current!.style.display = 'none';
         contentRef.current!.style.height = 'auto';
-        headerRef.current!.style.pointerEvents = '';
+        setIsExpanding(false);
       }, props.duration!);
     }
   };
 
   const onClick = () => {
-    props.onClick?.(isExpanded!);
-    if (props.isExpanded === null || props.isExpanded === undefined)
-      setIsExpanded(!isExpanded);
+    if (!isExpanding) {
+      props.onClick?.(isExpanded!);
+      if (props.isExpanded === null || props.isExpanded === undefined)
+        setIsExpanded(!isExpanded);
+    }
+  };
+
+  const onKeyPress = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter') headerRef.current!.click();
   };
 
   React.useEffect(() => {
@@ -75,7 +82,7 @@ const Collapse = (props: Props, ref: any) => {
       <div
         className={`zawCollapse_header `}
         onClick={onClick}
-        onKeyPress={onClick}
+        onKeyPress={onKeyPress}
         ref={headerRef}
         role="heading"
         aria-level={props['aria-level']}
