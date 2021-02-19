@@ -7,11 +7,12 @@
   color: white;
   border-bottom: 1px solid black;
 }
-.zawCollapse :global .zawCollapse_header .zawCollapse_header_expandBtn {
+.zawCollapse
+  :global
+  .zawCollapse_header
+  .zawCollapse_header_btn
+  .zawCollapse_header_btn_icon {
   float: right;
-  border: none;
-  background-color: inherit;
-  color: white;
 }
 .zawCollapse :global .zawCollapse_content {
   overflow: hidden;

@@ -6,6 +6,7 @@ interface Props {
   children: React.ReactNode;
   header: React.ReactNode;
   duration?: number;
+  'aria-level'?: number;
   className?: string;
   Key?: string;
   initExpanded?: boolean;
@@ -69,19 +70,39 @@ const Collapse = (props: Props, ref: any) => {
     <div
       className={`${props.className} ${styles.zawCollapse}`}
       ref={element => (currentRef = element)}
+      role="details"
     >
       <div
         className={`zawCollapse_header `}
-        onClick={() => onClick()}
+        onClick={onClick}
+        onKeyPress={onClick}
         ref={headerRef}
+        role="heading"
+        aria-level={props['aria-level']}
       >
-        {props.header}
-        <button className={`zawCollapse_header_expandBtn`}>
-          {isExpanded ? '▲' : '▼'}
-        </button>
+        <div
+          className={`zawCollapse_header_btn`}
+          id="accordion_header_rzc"
+          aria-controls="accordion_content_rzc"
+          role="button"
+          aria-disabled={false}
+          aria-expanded={isExpanded}
+          tabIndex={0}
+        >
+          {props.header}
+          <i className={`zawCollapse_header_btn_icon`}>
+            {isExpanded ? '▲' : '▼'}
+          </i>
+        </div>
       </div>
 
-      <div className={`zawCollapse_content`} ref={contentRef}>
+      <div
+        className={`zawCollapse_content`}
+        id="accordion_content_rzc"
+        ref={contentRef}
+        aria-labelledby="accordion_header_rzc"
+        aria-hidden={!isExpanded}
+      >
         {props.children}
       </div>
     </div>
@@ -90,6 +111,7 @@ const Collapse = (props: Props, ref: any) => {
 const CollapseComponent = React.forwardRef<RefType, Props>(Collapse);
 CollapseComponent.defaultProps = {
   className: '',
+  'aria-level': 3,
   duration: 700,
   initExpanded: false,
 } as Partial<Props>;
