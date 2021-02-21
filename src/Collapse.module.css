@@ -7,6 +7,12 @@
   color: white;
   border-bottom: 1px solid black;
 }
+
+.zawCollapse :global .zawCollapse_header--disabled {
+  opacity: 80%;
+  pointer-events: none;
+}
+
 .zawCollapse
   :global
   .zawCollapse_header

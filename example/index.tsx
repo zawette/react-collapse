@@ -12,10 +12,11 @@ const App = () => {
         header="nested collapse"
         className="myAccordion"
         // initExpanded
-        isExpanded={isExpanded}
-        onClick={prevState => {
-          setIsExpanded(!isExpanded);
-        }}
+        // disabled
+        // isExpanded={isExpanded}
+        // onClick={prevState => {
+        // setIsExpanded(!isExpanded);
+        // }}
       >
         <Collapse header="test" className="myAccordion" duration={400}>
           Proident aute elit eiusmod eu consequat. Nulla mollit fugiat qui

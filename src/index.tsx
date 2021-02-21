@@ -11,6 +11,7 @@ interface Props {
   Key?: string;
   initExpanded?: boolean;
   isExpanded?: boolean;
+  disabled?: boolean;
   onClick?: (prevState: boolean) => any;
 }
 
@@ -24,6 +25,7 @@ const Collapse = (props: Props, ref: any) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   let currentRef = props.Key && ref.current[props.Key];
+  const disabledStyling = props.disabled ? 'zawCollapse_header--disabled' : '';
 
   const toggle = () => {
     setIsExpanding(true);
@@ -53,7 +55,7 @@ const Collapse = (props: Props, ref: any) => {
   };
 
   const onClick = () => {
-    if (!isExpanding) {
+    if (!isExpanding && !props.disabled) {
       props.onClick?.(isExpanded!);
       if (props.isExpanded === null || props.isExpanded === undefined)
         setIsExpanded(!isExpanded);
@@ -80,7 +82,7 @@ const Collapse = (props: Props, ref: any) => {
       role="details"
     >
       <div
-        className={`zawCollapse_header `}
+        className={`zawCollapse_header ${disabledStyling}`}
         onClick={onClick}
         onKeyPress={onKeyPress}
         ref={headerRef}
