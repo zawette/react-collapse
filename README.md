@@ -26,7 +26,7 @@ import Collapse from 'react-zaw-collapse';
 <Collapse
   header="test Header"
   className="myAccordion"
-  onToggle={prevState => console.log(prevState)}
+  onClick={prevState => console.log(prevState)}
 >
   Officia excepteur est velit tempor voluptate laborum excepteur ad enim duis
   velit velit velit exercitation. Sunt mollit nisi minim sint amet culpa nisi
