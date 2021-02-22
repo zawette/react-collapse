@@ -24,7 +24,6 @@ const Collapse = (props: Props, ref: any) => {
   const [isExpanding, setIsExpanding] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
-  let currentRef = props.Key && ref.current[props.Key];
   const disabledStyling = props.disabled ? 'zawCollapse_header--disabled' : '';
 
   const toggle = () => {
@@ -76,11 +75,7 @@ const Collapse = (props: Props, ref: any) => {
   }, [props.isExpanded]);
 
   return (
-    <div
-      className={`${props.className} ${styles.zawCollapse}`}
-      ref={element => (currentRef = element)}
-      role="details"
-    >
+    <div className={`${props.className} ${styles.zawCollapse}`} ref={ref}>
       <div
         className={`zawCollapse_header ${disabledStyling}`}
         onClick={onClick}
