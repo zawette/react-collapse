@@ -39,13 +39,14 @@ import Collapse from 'react-zaw-collapse';
 
 ## API
 
-| name         | type                         | default | description                                 |
-| ------------ | ---------------------------- | ------- | ------------------------------------------- |
-| header       | string or node               |         | header of accordion                         |
-| duration     | number                       | 700     | transition duration                         |
-| aria-level   | number                       | 3       | heading level in the document structure     |
-| className    | string                       |         | custom className                            |
-| initExpanded | boolean                      | false   | whether the accordion is expanded initially |
-| isExpanded   | boolean                      |         | controlled accordion                        |
-| disabled     | boolean                      |         | disable accordion                           |
-| onClick      | (prevState: boolean) => any; |         | called whe the accordion is toggled         |
+| name           | type                                                       | default | description                                                    |
+| -------------- | ---------------------------------------------------------- | ------- | -------------------------------------------------------------- |
+| header         | string or node                                             |         | header of accordion                                            |
+| duration       | number                                                     | 700     | transition duration                                            |
+| aria-level     | number                                                     | 3       | heading level in the document structure                        |
+| className      | string                                                     |         | custom className                                               |
+| initExpanded   | boolean                                                    | false   | whether the accordion is expanded initially                    |
+| isExpanded     | boolean                                                    |         | controlled accordion                                           |
+| disabled       | boolean                                                    |         | disable accordion                                              |
+| onClick        | (prevState: boolean) => any;                               |         | called whe the accordion is toggled                            |
+| headerTemplate | (headerContent: ReactNode,isExpanded:boolean) => ReactNode |         | custom header template (to change the expand icon for example) |

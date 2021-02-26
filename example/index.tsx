@@ -12,6 +12,7 @@ const App = () => {
         header="a collapse"
         className="myAccordion"
         initExpanded
+        // headerTemplate={headerContent => <>{headerContent}</>}
         // disabled
         // isExpanded={isExpanded}
         // onClick={prevState => {

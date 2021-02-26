@@ -13,11 +13,25 @@ interface Props {
   isExpanded?: boolean;
   disabled?: boolean;
   onClick?: (prevState: boolean) => any;
+  headerTemplate?: (
+    headerContent: React.ReactNode,
+    isExpanded: boolean
+  ) => React.ReactNode;
 }
 
 interface RefType {
   [key: string]: React.ReactNode;
 }
+
+const DefaultHeaderTemplate = (
+  headerContent: React.ReactNode,
+  isExpanded: boolean
+) => (
+  <>
+    {headerContent}
+    <i className={`zawCollapse_header_btn_icon`}>{isExpanded ? '▲' : '▼'}</i>
+  </>
+);
 
 const Collapse = (props: Props, ref: any) => {
   const [isExpanded, setIsExpanded] = useState(props.initExpanded);
@@ -93,10 +107,7 @@ const Collapse = (props: Props, ref: any) => {
           aria-expanded={isExpanded}
           tabIndex={0}
         >
-          {props.header}
-          <i className={`zawCollapse_header_btn_icon`}>
-            {isExpanded ? '▲' : '▼'}
-          </i>
+          {props.headerTemplate!(props.header, isExpanded!)}
         </div>
       </div>
 
@@ -118,6 +129,7 @@ CollapseComponent.defaultProps = {
   'aria-level': 3,
   duration: 700,
   initExpanded: false,
+  headerTemplate: DefaultHeaderTemplate,
 } as Partial<Props>;
 
 export default CollapseComponent;
