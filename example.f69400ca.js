@@ -33423,11 +33423,17 @@ function styleInject(css, ref) {
   }
 }
 
-var css_248z = ".Collapse-module_zawCollapse__2dmHg {\n}\n.Collapse-module_zawCollapse__2dmHg .zawCollapse_header {\n  padding: 1rem;\n  cursor: pointer;\n  background-color: #4b5563;\n  color: white;\n  border-bottom: 1px solid black;\n}\n\n.Collapse-module_zawCollapse__2dmHg .zawCollapse_header--disabled {\n  opacity: 80%;\n  pointer-events: none;\n}\n\n.Collapse-module_zawCollapse__2dmHg\n  .zawCollapse_header\n  .zawCollapse_header_btn\n  .zawCollapse_header_btn_icon {\n  float: right;\n}\n.Collapse-module_zawCollapse__2dmHg .zawCollapse_content {\n  overflow: hidden;\n  display: none;\n  background-color: white;\n  color: black;\n  margin-left: 1rem;\n}\n";
+var css_248z = ".Collapse-module_zawCollapse__2dmHg {\n}\n.Collapse-module_zawCollapse__2dmHg .zawCollapse_header {\n  padding: 1rem;\n  cursor: pointer;\n  background-color: #4b5563;\n  color: white;\n  border-bottom: 1px solid black;\n}\n\n.Collapse-module_zawCollapse__2dmHg .zawCollapse_header--disabled {\n  opacity: 80%;\n  pointer-events: none;\n}\n\n.Collapse-module_zawCollapse__2dmHg\n  .zawCollapse_header\n  .zawCollapse_header_btn\n  .zawCollapse_header_btn_icon {\n  float: right;\n}\n.Collapse-module_zawCollapse__2dmHg .zawCollapse_content {\n  overflow: hidden;\n  display: none;\n  background-color: white;\n  color: black;\n  padding-left: 1rem;\n}\n";
 var styles = {
   "zawCollapse": "Collapse-module_zawCollapse__2dmHg"
 };
 styleInject(css_248z);
+
+var DefaultHeaderTemplate = function DefaultHeaderTemplate(headerContent, isExpanded) {
+  return (0, _react.createElement)(_react.Fragment, null, headerContent, (0, _react.createElement)("i", {
+    className: "zawCollapse_header_btn_icon"
+  }, isExpanded ? '▲' : '▼'));
+};
 
 var Collapse = function Collapse(props, ref) {
   var _useState = (0, _react.useState)(props.initExpanded),
@@ -33507,9 +33513,7 @@ var Collapse = function Collapse(props, ref) {
     "aria-disabled": false,
     "aria-expanded": isExpanded,
     tabIndex: 0
-  }, props.header, (0, _react.createElement)("i", {
-    className: "zawCollapse_header_btn_icon"
-  }, isExpanded ? '▲' : '▼'))), (0, _react.createElement)("div", {
+  }, props.headerTemplate(props.header, isExpanded))), (0, _react.createElement)("div", {
     className: "zawCollapse_content",
     id: "accordion_content_rzc",
     ref: contentRef,
@@ -33523,7 +33527,8 @@ CollapseComponent.defaultProps = {
   className: '',
   'aria-level': 3,
   duration: 700,
-  initExpanded: false
+  initExpanded: false,
+  headerTemplate: DefaultHeaderTemplate
 };
 var _default = CollapseComponent;
 exports.default = _default;
@@ -33587,18 +33592,15 @@ var App = function App() {
       isExpanded = _a[0],
       setIsExpanded = _a[1];
 
-  return React.createElement("div", null, React.createElement(_1.default, {
-    header: "nested collapse",
-    className: "myAccordion"
+  return React.createElement("div", {
+    style: {
+      backgroundColor: 'greenyellow'
+    }
   }, React.createElement(_1.default, {
-    header: "test",
+    header: "a collapse",
     className: "myAccordion",
-    duration: 400
-  }, "Proident aute elit eiusmod eu consequat. Nulla mollit fugiat qui incididunt aliquip aliqua eu occaecat ea et incididunt. Non ex est consequat do aliqua aliqua ipsum aute commodo eu consequat. Commodo dolor aliqua nostrud qui aliquip tempor magna nulla non voluptate officia eiusmod. Ex Lorem mollit officia labore ut nisi occaecat anim cillum eiusmod mollit et laboris sint. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."), React.createElement(_1.default, {
-    header: "test",
-    className: "myAccordion",
-    duration: 200
-  }, "Proident aute elit eiusmod eu consequat. Nulla mollit fugiat qui incididunt aliquip aliqua eu occaecat ea et incididunt. Non ex est consequat do aliqua aliqua ipsum aute commodo eu consequat. Commodo dolor aliqua nostrud qui aliquip tempor magna nulla non voluptate officia eiusmod. Ex Lorem mollit officia labore ut nisi occaecat anim cillum eiusmod mollit et laboris sint. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.")));
+    initExpanded: true
+  }, "Proident aute elit eiusmod eu consequat. Nulla mollit fugiat qui incididunt aliquip aliqua eu occaecat ea et incididunt. Non ex est consequat do aliqua aliqua ipsum aute commodo eu consequat. Commodo dolor aliqua nostrud qui aliquip tempor magna nulla non voluptate officia eiusmod. Ex Lorem mollit officia labore ut nisi occaecat anim cillum eiusmod mollit et laboris sint. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet."));
 };
 
 ReactDOM.render(React.createElement(App, null), document.getElementById('root'));
@@ -33630,7 +33632,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51468" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63008" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
